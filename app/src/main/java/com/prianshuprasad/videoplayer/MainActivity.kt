@@ -24,17 +24,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
-
         rcview= findViewById(R.id.viewPagerVideos)
 
+        // creating an object of adapter
         mAdapter=  adapter(this)
+
         rcview.adapter= mAdapter
+
+        //calling fetch function to retrieve data from API
         fetch()
 
 
-
-
+            // using registerOnPageChangeCallback() to get page scroll state
 
         rcview.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
@@ -48,8 +49,10 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
+                //current position is the index at which exoplayer is to played
                currentPos= position
 
+                // At prevPosition index exoplyer is paused
                 mAdapter.videoControl_ChangePage(currentPos,prevPosition)
 
                 prevPosition= currentPos
@@ -59,11 +62,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
+                // This method gives gives the scrolling state hence at scrolling state current video should be paused
 
                 if(state!=0)
                 mAdapter.videoControl_OnScroll(prevPosition)
-                else
+                else // at state=0  its not scrolling anymore
                     mAdapter.videoControll_OnFalseScroll(currentPos)
+
             }
         })
 
@@ -78,23 +83,27 @@ class MainActivity : AppCompatActivity() {
 
     fun fetch(): MutableList<videoData> {
 
-        val dataArray= mutableListOf<videoData>()
+        val dataArray= mutableListOf<videoData>() // array to store array on videoData . videoData stores url of video
 
-
-
+        //api url
         val url ="https://pixabay.com/api/videos/?key=30305956-0e86d639df1a301cd153ad39b&q=yellow+flowers&image_type=photo&pretty=true"
+
+        // volley
         val mRequestQueue = Volley.newRequestQueue(this)
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
 
             { response ->
 
+                //responce from volley
 
                 val hintsArray = response.getJSONArray("hits")
 
                 for(i in 0..(hintsArray.length()) ){
 
                     try {
+
+                        //video urls are extracted from Json Object
                         val video_url = hintsArray.getJSONObject(i).getJSONObject("videos")
                             .getJSONObject("tiny").getString("url")
 
@@ -111,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
 
+                // data is updated in adapter
                 mAdapter.update(dataArray as ArrayList<videoData>)
 
 
@@ -119,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             },
             { error ->
 
+                //volley could not fetch data from api
                 Toast.makeText(this,"Some Error Occured",Toast.LENGTH_LONG).show()
             }
         )
