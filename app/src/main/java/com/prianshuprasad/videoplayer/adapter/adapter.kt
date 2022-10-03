@@ -30,9 +30,6 @@ class adapter(private val listener: MainActivity) :
 
         }
 
-
-
-
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -83,8 +80,8 @@ class adapter(private val listener: MainActivity) :
 
         //prepare thr player
         player.prepare()
-        // Start the playback.
 
+        // setting player as foreground
         player.setForegroundMode(true)
 
         // adding the player in playerList
@@ -113,7 +110,7 @@ class adapter(private val listener: MainActivity) :
 
 
    fun videoControl_ChangePage(currPosition:Int , prevPosition:Int){
-       // Pause the playback for prevIndex and play for currIndex
+       // Pause the playback for previous Index and play for current Index
 
        playerList[prevPosition].pause()
        playerList[currPosition].play()
@@ -121,7 +118,7 @@ class adapter(private val listener: MainActivity) :
    }
 
     fun videoControl_OnScroll(prevPosition: Int){
-        // pause the playback when scrolling state
+        // pause the playback when in scrolling  state
         playerList[prevPosition].pause()
 
     }

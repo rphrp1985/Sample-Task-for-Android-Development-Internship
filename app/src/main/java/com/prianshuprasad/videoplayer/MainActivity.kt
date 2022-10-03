@@ -14,10 +14,10 @@ import com.prianshuprasad.videoplayer.adapter.adapter
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mAdapter: adapter
-    lateinit var rcview:ViewPager2
-    var currentPos:Int=0
-    var prevPosition:Int=0
+    private lateinit var mAdapter: adapter  // adapter
+    lateinit var rcview:ViewPager2  // viewPager2
+    var currentPos:Int=0  // variable storing the current index of page in ViewPager2
+    var prevPosition:Int=0 //  variable storing the previous index of page in ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
 
             // using registerOnPageChangeCallback() to get page scroll state
-
         rcview.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
