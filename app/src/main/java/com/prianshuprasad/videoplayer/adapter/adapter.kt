@@ -1,8 +1,12 @@
 package com.prianshuprasad.videoplayer.adapter
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -20,13 +24,19 @@ class adapter(private val listener: MainActivity) :
     private val item: ArrayList<videoData> = ArrayList() // array to store videoData. VideoData stores url
     private val playerList:ArrayList<ExoPlayer> = ArrayList() // array to store Exoplyer which is later used to control playback of videos on scroll
 
+
     //ViewHolder Class
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val videoPlayer:PlayerView
+        val title:TextView
+        val control:ImageView
 
         init {
             //initializing videoPlayer variable
             videoPlayer= view.findViewById(R.id.player1)
+            title= view.findViewById(R.id.videoTitle)
+            control= view.findViewById(R.id.controlView)
+
 
         }
 
@@ -38,6 +48,8 @@ class adapter(private val listener: MainActivity) :
             .inflate(R.layout.item_view, viewGroup, false)
 
 
+
+
         val viewHolder= ViewHolder(view)
         view.setOnClickListener {
 
@@ -46,10 +58,23 @@ class adapter(private val listener: MainActivity) :
 
 //            if video is playing then pause it else play it
             if(playerList[index].isPlaying){
+
+                viewHolder.control.setImageResource(R.drawable.ic_baseline_play_circle_filled_24)
+
+                Handler().postDelayed({
+                    viewHolder.control.setImageResource(R.drawable.blank)
+                },1000)
+
                 playerList[index].pause()
 
             }else
             {
+
+                viewHolder.control.setImageResource(R.drawable.ic_baseline_pause_circle_24)
+
+                Handler().postDelayed({
+                    viewHolder.control.setImageResource(R.drawable.blank)
+                },1000)
                 playerList[index].play()
 
             }
@@ -68,7 +93,9 @@ class adapter(private val listener: MainActivity) :
         // declaring and initilizing Exoplayer
         val player = ExoPlayer.Builder(listener).build()
 
+        viewHolder.title.text= item[position].title
         viewHolder.videoPlayer.setPlayer(player)
+
 
         player.setRepeatMode(Player.REPEAT_MODE_ONE)
 

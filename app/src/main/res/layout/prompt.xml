@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/prompt"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Enter Title of the Video"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/videoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="add video Title">
+
+
+        <requestFocus />
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Tages"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    <EditText
+        android:id="@+id/videoTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add tags here">
+
+
+        <requestFocus />
+
+    </EditText>
+
+
+
+
+
+
+</LinearLayout>

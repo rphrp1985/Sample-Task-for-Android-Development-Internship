@@ -4,19 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
 
+
+        >
+    <Toolbar
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+
+
+        >
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:hint="Search Here"
+            />
+
+
+    </Toolbar>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerVideos"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
 
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/addButton"
+        android:scaleType="centerCrop"
+        android:layout_weight="9"
 
         />
 
+<ImageButton
+    android:id="@+id/addButton"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:src="@drawable/ic_baseline_add_24"
+    android:background="@color/purple_500"
+    android:layout_weight=".5"
 
+    />
 
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
