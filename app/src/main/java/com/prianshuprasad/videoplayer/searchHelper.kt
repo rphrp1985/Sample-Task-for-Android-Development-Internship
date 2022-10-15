@@ -13,6 +13,7 @@ class searchHelper {
 
     fun addData(title:String,tags:ArrayList<String>,docID:String){
 
+
         tags.add(title)
         for(tagi in tags) {
 
